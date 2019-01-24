@@ -1,0 +1,68 @@
+
+```{r}
+library(ggmap)
+library(rgdal)
+library(rgeos)
+library(maptools)
+library(dplyr)
+library(tidyr)
+library(tmap)
+library(sf)
+library(raster)
+library(spData)
+library(leaflet)
+library(readxl)
+library(leaflet.extras)
+library(htmltools)
+
+```
+
+```{r}
+exchange_data <- read_excel("C:\\Users\\kaely\\Desktop\\Winter Project Plan\\Exchange Datasets\\Exchange Information Final.xlsx")
+```
+
+```{r}
+str(exchange_data)
+```
+
+```{r}
+# Create a leaflet map with default map tile using addTiles()
+map <-
+     exchange_data %>%
+        leaflet() %>% 
+            addProviderTiles(provider = "CartoDB") %>%
+            addSearchOSM() %>% 
+            addReverseSearchOSM() 
+    
+# Add circle markers with labels (cant seem to add spacing between label)
+map %>%
+    addCircleMarkers(data = exchange_data, radius = 2,label = ~paste0(Partner_University, Country, City))
+
+
+```
+
+```{r}
+# Create suset of data according to continent
+Europe <- filter(exchange_data, Region == "Europe")  
+Africa <- filter(exchange_data, Region == "Africa")
+Asia <- filter(exchange_data, Region == "Asia")
+Middle_East <- filter(exchange_data, Region == "Middle East")
+South_America <- filter(exchange_data, Region == "South America")
+North_America <- filter(exchange_data, Region == "North America")
+
+
+# Create a leaflet map for Europe region and subsequently
+m3 <- leaflet() %>% 
+        addProviderTiles("CartoDB") %>% 
+        addCircleMarkers(data = Europe, radius = 2, label = ~paste0(Partner_University, Country, City), group = "Europe")  %>% 
+        addCircleMarkers(data = Asia, radius = 2, label = ~paste0(Partner_University, Country, City), group = "Asia")  %>% 
+        addCircleMarkers(data = Africa, radius = 2, label = ~paste0(Partner_University, Country, City), group = "Africa")  %>% 
+        addCircleMarkers(data = Middle_East, radius = 2, label = ~paste0(Partner_University, Country, City), group = "Middle East")  %>% 
+        addCircleMarkers(data = South_America, radius = 2, label = ~paste0(Partner_University, Country, City), group = "South America")  %>% 
+        addCircleMarkers(data = North_America, radius = 2, label = ~paste0(Partner_University, Country, City), group = "North America") %>%
+        addLayersControl(overlayGroups = c("Europe", "Africa", "Asia", "Middle East", "South America", "North America"))
+
+
+m3
+```
+

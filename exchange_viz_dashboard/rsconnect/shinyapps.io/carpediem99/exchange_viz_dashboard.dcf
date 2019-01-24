@@ -1,0 +1,10 @@
+name: exchange_viz_dashboard
+title:
+username:
+account: carpediem99
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 661274
+bundleId: 1832127
+url: https://carpediem99.shinyapps.io/exchange_viz_dashboard/
+when: 1548261854.94776
