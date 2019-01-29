@@ -1,4 +1,4 @@
-Exchange Partner Universities Visualization in Singapore Managment Universities 
+Exchange Partner Universities Visualization in Singapore Managment University 
 
 This project shows the map view distribution of the partner universities in 2019 Spring Exchange for SMU. 
 
